@@ -7,8 +7,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ua.com.reactive.gr_403_reactive.entity.Client;
-import ua.com.reactive.gr_403_reactive.entity.Greeting;
+import ua.com.reactive.gr_403_reactive.entity.User;
 
 @Component
 public class GreetingHandler {
@@ -17,32 +16,28 @@ public class GreetingHandler {
         return ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(new Greeting("Hello, Spring! Havuka Yelyzaveta, IN-403")));
+                .body(BodyInserters.fromValue("Hello World! Havuka Yelyzaveta, IN-403"));
     }
 
-    public Mono<ServerResponse> home(ServerRequest request) {
+    public Mono<ServerResponse> users(ServerRequest request) {
         return ServerResponse
                 .ok()
-                .contentType(MediaType.TEXT_PLAIN)
-                .body(BodyInserters.fromValue("Main page! Havuka Yelyzaveta, IN-403"));
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue("User Page: Havuka Yelyzaveta, IN-403"));
     }
 
-    public Mono<ServerResponse> getClients(ServerRequest request) {
-        String start = request
-                .queryParam("start")
-                .orElse("0");
+    public Mono<ServerResponse> admin(ServerRequest request) {
 
-        Flux<Client> clients = Flux.just(
-                        new Client(1L, "Yelyzaveta", "Havuka", 20),
-                        new Client(2L, "Liza", "Havuka", 20),
-                        new Client(3L, "Yelyzaveta", "Havuka IN-403", 20)
-                )
-                .skip(Long.valueOf(start))
-                .take(2);
+        Flux<User> users = Flux.
+                just(
+                        new User(1L, "Yelyzaveta", "1234"),
+                        new User(2L, "Liza", "1234"),
+                        new User(3L, "Havuka IN-403", "1234")
+                );
 
         return ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(clients, Client.class);
+                .body(users, User.class);
     }
 }
