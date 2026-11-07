@@ -1,4 +1,16 @@
 package ua.com.reactive.gr_403_reactive.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reader {
+
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
 }
