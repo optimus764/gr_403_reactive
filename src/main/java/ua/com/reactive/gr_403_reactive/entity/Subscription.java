@@ -3,6 +3,8 @@ package ua.com.reactive.gr_403_reactive.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,8 +12,10 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table("subscriptions")
 public class Subscription {
 
+    @Id
     private Long id;
     private Long readerId;           // хто передплачує
     private Long publicationId;      // яке видання
